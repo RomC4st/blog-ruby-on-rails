@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-db:migrate 
+bin/rails db:migrate RAILS_ENV=development
 rake db:seed
 bundle install
-bin/rails serve
+bin/rails server
