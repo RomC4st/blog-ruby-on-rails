@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# Install
+
+```
+   sh bin/install-dev.sh
+```
