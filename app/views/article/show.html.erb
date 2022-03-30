@@ -2,13 +2,12 @@
 <h2><%= @article.name %></h2>
 <p><%= @article.content %></p>
 
-<%= form_with model: @article,url: "edit", method: :get do |form| %>
-  <%= form.submit "Éditer #{@article.name}" %>
-<% end %>
+<%= link_to "Éditer", edit_article_path %>
 <br>
-<%= form_with model: @article,url: "destroy", method: :delete do |form| %>
+
+<%= form_with model: @article,url: "/article/#{@article.id}", method: :delete do |form| %>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <%= form.submit "Effacer #{@article.name}" , :onclick => "return confirm('Êtes vous sur de vouloir effacer #{@article.name}')"  %>
+  <%= form.submit "Effacer" , :onclick => "return confirm('Êtes vous sur de vouloir effacer #{@article.name}')"  %>
 <% end %>
 
 
