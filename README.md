@@ -28,3 +28,5 @@ Things you may want to cover:
 ```
    sh bin/install-dev.sh
 ```
+
+Create .env file ( see .env.example)

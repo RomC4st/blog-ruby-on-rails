@@ -70,3 +70,10 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+
+#bcrypt
+
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'dotenv', '~> 2.7', '>= 2.7.6'

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Authentication
+
   # rescue_from ActiveRecord::RecordNotFound, :with => :rescue404
   # rescue_from ActionController::RoutingError, :with => :rescue404
 
