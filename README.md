@@ -32,7 +32,7 @@ Things you may want to cover:
 # Install with docker
 
 ```
-   docker cmpose up
+   docker compose up
 ```
 
 # DB migration and seeds with Docker
