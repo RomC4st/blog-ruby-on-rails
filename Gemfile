@@ -71,9 +71,8 @@ group :test do
   gem "webdrivers"
 end
 
-
-#bcrypt
-
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'dotenv', '~> 2.7', '>= 2.7.6'
+
+gem "rolify"

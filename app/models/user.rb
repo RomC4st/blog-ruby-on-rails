@@ -1,5 +1,8 @@
 # app/models/user.rb
 class User < ApplicationRecord
+  rolify
+  after_create :assign_default_role
+
   CONFIRMATION_TOKEN_EXPIRATION = 10.minutes
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
 
@@ -25,6 +28,10 @@ class User < ApplicationRecord
     else
       false
     end
+  end
+
+  def assign_default_role
+    self.add_role(:user) if self.roles.blank?
   end
 
   def confirmable_email
