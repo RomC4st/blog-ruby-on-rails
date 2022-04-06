@@ -23,10 +23,23 @@ Things you may want to cover:
 
 * ...
 
-# Install
+# Install with script
 
 ```
    sh bin/install-dev.sh
+```
+
+# Install with docker
+
+```
+   docker cmpose up
+```
+
+# DB migration and seeds with Docker
+
+```
+    docker-compose run --rm web rake db:seed
+    docker-compose run --rm web bin/rails db:migrate RAILS_ENV=development
 ```
 
 Create .env file ( see .env.example)
