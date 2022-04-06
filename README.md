@@ -38,8 +38,9 @@ Things you may want to cover:
 # DB migration and seeds with Docker
 
 ```
-    docker-compose run --rm web rake db:seed
-    docker-compose run --rm web bin/rails db:migrate RAILS_ENV=development
+   docker-compose run --rm web bin/rails db:migrate RAILS_ENV=development
+   docker-compose run --rm web rake db:seed
+    
 ```
 
 Create .env file ( see .env.example)
