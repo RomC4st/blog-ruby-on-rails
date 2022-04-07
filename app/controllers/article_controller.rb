@@ -22,10 +22,8 @@ class ArticleController < ApplicationController
     if current_user.has_role? :admin
       @article = Article.create(article_params)
       redirect_to article_path(@article)
-    elsif current_user.has_role? :user
-      redirect_to article_index_path
     else
-      redirect_to root_path alert: "Something went wrong."
+      raise StandardError.new('Something went wrong.')
     end
 
   end
@@ -43,10 +41,8 @@ class ArticleController < ApplicationController
       @article = Article.find(params[:id])
       @article.update(article_params)
       redirect_to article_path(@article)
-    elsif current_user.has_role? :user
-      redirect_to article_index_path
     else
-      redirect_to root_path alert: "Something went wrong."
+      raise StandardError.new('Something went wrong.')
     end
   end
 
@@ -55,10 +51,8 @@ class ArticleController < ApplicationController
       @article = Article.find(params[:id])
       @article.destroy
       redirect_to :action => "index"
-    elsif current_user.has_role? :user
-      redirect_to article_index_path
     else
-      redirect_to root_path alert: "Something went wrong."
+      raise StandardError.new('Something went wrong.')
     end
   end
 
