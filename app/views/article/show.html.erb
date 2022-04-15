@@ -1,5 +1,6 @@
 <h1>Article#show</h1>
 <h2><%= @article.name %></h2>
+<p> Article posté <%= time_tag @article.created_at, "data-local": "time-ago" %></p>
 <p><%= @article.content %></p>
 
 <% if current_user.has_role? :admin %>
