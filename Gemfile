@@ -10,8 +10,11 @@ gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
-
+if (ENV['RAILS_ENV'] =='test') 
+   gem 'pg'
+else
+  gem "sqlite3", "~> 1.4"
+end
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
