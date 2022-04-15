@@ -69,8 +69,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem 'pg'
 end
+
+gem 'pg'
 
 gem 'bcrypt', '~> 3.1.7'
 
