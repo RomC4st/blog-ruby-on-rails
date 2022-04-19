@@ -32,6 +32,10 @@ class PasswordsController < ApplicationController
     if @user
       if @user.unconfirmed?
         redirect_to new_confirmation_path, alert: "You must confirm your email before you can sign in."
+      elsif !helpers.password_check
+        redirect_to edit_password_path, alert:'Les mots de passe ne correspondent pas'
+      elsif !helpers.regex_password 
+        redirect_to edit_password_path, alert:'Minimunm 8 caractères, au moins une lettre, une majuscule, une minuscule, un nombre et un caractère spéciale'
       elsif @user.update(password_params)
         redirect_to login_path, notice: "Sign in."
       else

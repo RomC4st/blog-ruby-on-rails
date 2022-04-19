@@ -2,13 +2,20 @@ class UsersController < ApplicationController
   before_action :redirect_if_authenticated, only: [:create, :new]
 
   def create
-    @user = User.new(create_user_params)
-    if @user.save
-      @user.send_confirmation_email!
-      redirect_to root_path, notice: "Please check your email for confirmation instructions."
+    if !helpers.password_check
+      redirect_to sign_up_path, alert:'Les mots de passe ne correspondent pas'
+    elsif !helpers.regex_password
+       redirect_to sign_up_path, alert:'Minimunm 8 caractères, au moins une lettre, une majuscule, une minuscule, un nombre et un caractère spéciale'
     else
-      render :new, status: :unprocessable_entity
+      @user = User.new(create_user_params)
+      if @user.save
+        @user.send_confirmation_email!
+        redirect_to root_path, notice: "Please check your email for confirmation instructions."
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
+   
   end
 
   def new
@@ -27,9 +34,15 @@ class UsersController < ApplicationController
   end
 
   def update
+
     @user = current_user
     @active_sessions = @user.active_sessions.order(created_at: :desc)
-    if @user.authenticate(params[:user][:current_password])
+
+    if !helpers.password_check
+      redirect_to account_path, alert:'Les mots de passe ne correspondent pas'
+    elsif !helpers.regex_password
+       redirect_to account_path, alert:'Minimunm 8 caractères, au moins une lettre, une majuscule, une minuscule, un nombre et un caractère spéciale'
+    elsif @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
         if params[:user][:unconfirmed_email].present?
           @user.send_confirmation_email!
@@ -49,11 +62,14 @@ class UsersController < ApplicationController
   private
  
   def create_user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
   def update_user_params
-    params.require(:user).permit(:current_password, :password, :password_confirmation, :unconfirmed_email)
+      params.require(:user).permit(:current_password, :password, :password_confirmation, :unconfirmed_email)
   end
+
+ 
+
 
 end
