@@ -12,5 +12,13 @@
     <%= form.label :remember_me %>
     <%= form.check_box :remember_me %>
   </div>
+    <%= recaptcha_tags %>
+
   <%= form.submit "Sign In" %>
+
+  <% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
 <% end %>

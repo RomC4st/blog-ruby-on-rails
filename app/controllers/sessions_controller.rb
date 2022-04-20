@@ -9,11 +9,15 @@ class SessionsController < ApplicationController
       if @user.unconfirmed?
         redirect_to new_confirmation_path, alert: "Incorrect email or password."
       else
-        after_login_path = session[:user_return_to] || root_path
-        active_session = login @user
-        remember(active_session) if params[:user][:remember_me] == "1"
-        redirect_to article_index_path, notice: "Logged in"
-       #redirect_to after_login_path, notice: "Signed in."
+        if verify_recaptcha(model: @user) && @user.save
+          after_login_path = session[:user_return_to] || root_path
+          active_session = login @user
+          remember(active_session) if params[:user][:remember_me] == "1"
+          redirect_to article_index_path, notice: "Logged in"
+         #redirect_to after_login_path, notice: "Signed in."
+        else
+          render :new, status: :unprocessable_entity       
+        end
       end
     else
       flash.now[:alert] = "Incorrect email or password."

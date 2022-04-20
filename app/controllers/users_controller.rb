@@ -7,8 +7,9 @@ class UsersController < ApplicationController
     elsif !helpers.regex_password
        redirect_to sign_up_path, alert:'Minimunm 8 caractères, au moins une lettre, une majuscule, une minuscule, un nombre et un caractère spéciale'
     else
+
       @user = User.new(create_user_params)
-      if @user.save
+      if verify_recaptcha(model: @user) && @user.save
         @user.send_confirmation_email!
         redirect_to root_path, notice: "Please check your email for confirmation instructions."
       else
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
       redirect_to account_path, alert:'Les mots de passe ne correspondent pas'
     elsif !helpers.regex_password
        redirect_to account_path, alert:'Minimunm 8 caractères, au moins une lettre, une majuscule, une minuscule, un nombre et un caractère spéciale'
-    elsif @user.authenticate(params[:user][:current_password])
+    elsif verify_recaptcha(model: @user) && @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
         if params[:user][:unconfirmed_email].present?
           @user.send_confirmation_email!

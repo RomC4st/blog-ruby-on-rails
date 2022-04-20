@@ -1,4 +1,13 @@
 <%= form_with url: passwords_path, scope: :user do |form| %>
   <%= form.email_field :email, required: true %>
+      <%= recaptcha_tags %>
+
   <%= form.submit "Reset Password" %>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+  
 <% end %>
