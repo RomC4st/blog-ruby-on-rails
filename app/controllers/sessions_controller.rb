@@ -25,6 +25,18 @@ class SessionsController < ApplicationController
     end
   end
 
+  def omniauth
+    @user = User.from_omniauth(auth)
+    if(!@user)
+      redirect_to root_path, notice: "Unknow user"
+    else
+      @user.save
+      after_login_path = session[:user_return_to] || root_path
+      active_session = login @user
+      redirect_to article_index_path
+    end
+  end
+
   def destroy
     forget_active_session
    #logout
@@ -34,4 +46,8 @@ class SessionsController < ApplicationController
   def new
   end
 
+  private
+  def auth
+    request.env['omniauth.auth']
+  end
 end

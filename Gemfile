@@ -80,3 +80,8 @@ gem 'dotenv', '~> 2.7', '>= 2.7.6'
 gem "rolify"
 
 gem "recaptcha"
+
+gem 'omniauth-google-oauth2'
+
+gem "omniauth-rails_csrf_protection"
+

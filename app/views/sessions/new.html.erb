@@ -16,9 +16,18 @@
 
   <%= form.submit "Sign In" %>
 
+
+
   <% flash.each do |type, msg| %>
   <div>
     <%= msg %>
   </div>
 <% end %>
+
+
+
+<% end %>
+
+<%= form_tag('/auth/google_oauth2/', method: 'post') do %>
+    <button type='submit'>Login with Developer</button>
 <% end %>

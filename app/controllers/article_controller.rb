@@ -2,7 +2,6 @@ class ArticleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    puts(current_user.has_role? :admin)
     @articles = Article.all
   end
 

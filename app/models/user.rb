@@ -19,6 +19,17 @@ class User < ApplicationRecord
 
   MAILER_FROM_EMAIL =ENV['MAIL_USER']
 
+  def self.from_omniauth(auth)
+    where(email: auth.info.email).first_or_initialize do |user|
+      if(!user.id) 
+        return
+      end
+      user.user_name = auth.info.name
+      user.email = auth.info.email
+      user.password = SecureRandom.hex
+    end
+  end
+
   def confirm!
     if unconfirmed_or_reconfirming?
       if unconfirmed_email.present?
