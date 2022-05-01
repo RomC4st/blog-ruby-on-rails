@@ -31,8 +31,7 @@ class ArticleController < ApplicationController
   end
 
   def edit
-  
-    if current_user.has_role? :admin
+    if ((current_user.has_role? :admin )&& (Article.find(params[:id]).user_id == current_user.id))
       @article = Article.find(params[:id])
     else
       redirect_to article_index_path
@@ -41,7 +40,7 @@ class ArticleController < ApplicationController
 
   def update
     params[:article][:user_id] =current_user.id
-    if current_user.has_role? :admin
+    if ((current_user.has_role? :admin )&& (Article.find(params[:id]).user_id == current_user.id))
       @article = Article.find(params[:id])
       @article.update(article_params)
       redirect_to article_path(@article)
@@ -51,7 +50,7 @@ class ArticleController < ApplicationController
   end
 
   def destroy
-    if current_user.has_role? :admin
+    if ((current_user.has_role? :admin )&& (Article.find(params[:id]).user_id == current_user.id))
       @article = Article.find(params[:id])
       @article.destroy
       redirect_to :action => "index"
