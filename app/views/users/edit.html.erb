@@ -22,6 +22,10 @@
     <%= form.label :current_password, "Current password (we need your current password to confirm your changes)" %>
     <%= form.password_field :current_password, required: true %>
   </div>
+  <div>
+    <%= form.label :username %>
+    <%= form.text_field :username, required: true %>
+  </div>
         <%= recaptcha_tags %>
 
   <%= form.submit "Update Account" %>

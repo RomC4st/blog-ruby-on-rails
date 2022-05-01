@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_070847) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_01_084444) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -85,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_070847) do
     t.datetime "confirmed_at"
     t.string "password_digest", null: false
     t.string "unconfirmed_email"
+    t.string "username", default: "John Doe"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
