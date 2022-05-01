@@ -6,6 +6,7 @@ class ArticleController < ApplicationController
   end
 
   def show
+    @is_user_post=Article.find(params[:id]).user_id == current_user.id
     @article = Article.find(params[:id]) 
     @username = User.find(@article.user_id).username
   end
