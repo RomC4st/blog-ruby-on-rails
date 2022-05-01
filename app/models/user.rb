@@ -2,6 +2,7 @@
 class User < ApplicationRecord
   rolify
   after_create :assign_default_role
+  has_many :articles
 
   CONFIRMATION_TOKEN_EXPIRATION = 10.minutes
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes

@@ -10,6 +10,7 @@ class ArticleController < ApplicationController
   end
 
   def new
+
     if current_user.has_role? :admin
       @article = Article.new
     else
@@ -18,6 +19,7 @@ class ArticleController < ApplicationController
   end
 
   def create
+    params[:article][:user_id] =current_user.id
     if current_user.has_role? :admin
       @article = Article.create(article_params)
       redirect_to article_path(@article)
@@ -28,6 +30,7 @@ class ArticleController < ApplicationController
   end
 
   def edit
+  
     if current_user.has_role? :admin
       @article = Article.find(params[:id])
     else
@@ -36,6 +39,7 @@ class ArticleController < ApplicationController
   end
 
   def update
+    params[:article][:user_id] =current_user.id
     if current_user.has_role? :admin
       @article = Article.find(params[:id])
       @article.update(article_params)
@@ -56,7 +60,7 @@ class ArticleController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:name, :content)
+    params.require(:article).permit(:name, :content , :user_id)
   end
 
 end
