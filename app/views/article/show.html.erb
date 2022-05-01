@@ -1,5 +1,7 @@
 <h1>Article#show</h1>
 <h2><%= @article.name %></h2>
+<p>Crée par: <span><%= @username %></span></p>
+
 <p> Article posté <%= time_tag @article.created_at, "data-local": "time-ago" %></p>
 <p><%= @article.content %></p>
 
